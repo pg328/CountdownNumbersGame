@@ -23,6 +23,21 @@ class Equation:
         Equation.usedEquations[self.id] = self.output
         return 0
 
+    def display(self):
+        output = []
+        if not isinstance(self.argList[0], int):
+            output += self.argList[0].display()
+            arg1 = self.argList[0].output
+        else:
+            arg1 = self.argList[0]
+        if not isinstance(self.argList[1], int):
+            output += self.argList[1].display()
+            arg2 = self.argList[1].output
+        else:
+            arg2 = self.argList[1]
+
+        return output + [f"{round(arg1,2)}{operators[self.operator]}{round(arg2, 2)} = {self.output}"]
+
     def __str__(self):
         output1 = str(round(self.argList[0], 2)) if isinstance(
             self.argList[0], float) else str(self.argList[0])

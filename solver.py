@@ -11,7 +11,7 @@ from utils import operators, operationHash, factorial, progressBar
 # - TARGET: the TARGET number.
 
 
-def solver(NUMBERS, TARGET):
+def solver(NUMBERS, TARGET, seqSolutions=True):
     NUMBERS = sorted(NUMBERS, reverse=True)
 
     # 1. Find all possible unordered pairs of the NUMBERS.
@@ -47,7 +47,12 @@ def solver(NUMBERS, TARGET):
                 if newNumber.isUsed() == 1:
                     yield ""
                     continue
-                yield f"{newNumber} = {TARGET}"
+                if seqSolutions:
+                    yield reduce(lambda x, y: x+", "+y, newNumber.display())
+
+                else:
+                    yield f"{newNumber} = {TARGET}"
+
                 continue
 
             # "Return" the empty string to signal maximal depth reached
